@@ -74,12 +74,14 @@ class Plan extends Model
             ->withPivot('value');
     }
 
+
     /**
-     * @return bool
+     * @param Builder $query
+     * @return Builder
      */
-    public function scopeIsActive(): bool
+    public function scopeIsActive(): Builder
     {
-        return (bool)$this->where('is_active', true);
+        return $this->where('is_active', true);
     }
 
     /**
@@ -95,11 +97,12 @@ class Plan extends Model
     }
 
     /**
-     * @return bool
+     * @param Builder $query
+     * @return Builder
      */
-    public function scopeFreePlan(): bool
+    public function scopeFreePlan(): Builder
     {
-        return (bool)$this->where('is_free', true);
+        return $this->where('is_free', true);
     }
 
     /**

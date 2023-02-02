@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\TomatoSubscription\Traits;
+namespace TomatoSubscription\TomatoSubscription\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -40,9 +40,6 @@ trait HasPlanSubscription
             'is_current' => true,
         ])->first();
 
-        if ($plan->is_free) {
-            return true;
-        }
 
         return $subscription && $subscription->active();
     }
@@ -60,7 +57,7 @@ trait HasPlanSubscription
             'plan_id' => $plan->getKey(),
             'starts_at' => $period->getStartDate(),
             'ends_at' => $period->getEndDate()->subDay()->endOfDay(),
-            'status' => PlanSubscriptionEnum::PENDING,
+            'status' => PlanSubscriptionEnum::ACTIVE,  //
             'is_current' => true,
         ]);
     }
