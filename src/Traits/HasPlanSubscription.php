@@ -1,12 +1,12 @@
 <?php
 
-namespace Queents\TomatoSubscription\Traits;
+namespace TomatoSubscription\TomatoSubscription\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Queents\TomatoSubscription\Models\Plan;
-use Queents\TomatoSubscription\Models\PlanSubscription;
-use Queents\TomatoSubscription\Enums\PlanSubscriptionEnum;
+use TomatoPHP\TomatoSubscription\Models\Plan;
+use TomatoPHP\TomatoSubscription\Models\PlanSubscription;
+use TomatoPHP\TomatoSubscription\Enums\PlanSubscriptionEnum;
 
 trait HasPlanSubscription
 {
