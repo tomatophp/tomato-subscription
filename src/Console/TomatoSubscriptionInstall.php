@@ -38,7 +38,6 @@ class TomatoSubscriptionInstall extends Command
     {
         $this->info('Publish Vendor Assets');
         $this->callSilent('optimize:clear');
-        $this->call('vendor:publish', ['--provider' => 'TomatoPHP\TomatoSubscription\TomatoSubscriptionServiceProvider']);
         $this->yarnCommand(['install']);
         $this->yarnCommand(['build']);
         $this->artisanCommand(["migrate"]);

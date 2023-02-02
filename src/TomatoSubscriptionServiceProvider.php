@@ -24,7 +24,7 @@ class TomatoSubscriptionServiceProvider extends ServiceProvider
         //Publish Config
         $this->publishes([
            __DIR__.'/../config/tomato-subscription.php' => config_path('tomato-subscription.php'),
-        ], 'config');
+        ], 'tomato-subscription-config');
 
         //Register Migrations
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
@@ -32,14 +32,15 @@ class TomatoSubscriptionServiceProvider extends ServiceProvider
         //Publish Migrations
         $this->publishes([
            __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'migrations');
+        ], 'tomato-subscription-migrations');
+
         //Register views
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'tomato-subscription');
 
         //Publish Views
         $this->publishes([
            __DIR__.'/../resources/views' => resource_path('views/vendor/tomato-subscription'),
-        ], 'views');
+        ], 'tomato-subscription-views');
 
         //Register Langs
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tomato-subscription');
@@ -47,7 +48,7 @@ class TomatoSubscriptionServiceProvider extends ServiceProvider
         //Publish Lang
         $this->publishes([
            __DIR__.'/../resources/lang' => resource_path('lang/vendor/tomato-subscription'),
-        ], 'lang');
+        ], 'tomato-subscription-lang');
 
         //Register Routes
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
