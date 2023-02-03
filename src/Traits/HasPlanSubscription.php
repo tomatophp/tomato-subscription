@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoSubscription\TomatoSubscription\Traits;
+namespace TomatoPHP\TomatoSubscription\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
