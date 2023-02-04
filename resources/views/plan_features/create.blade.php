@@ -1,3 +1,8 @@
+@php use Illuminate\Support\Facades\Route; @endphp
+@php
+    $routes = Route::getRoutes()
+@endphp
+
 <x-splade-modal class="font-main">
     <h1 class="text-2xl font-bold mb-4">{{trans('tomato-admin::global.crud.create')}} {{trans('tomato-subscription::global.features.single')}}</h1>
 
@@ -9,12 +14,23 @@
         <x-splade-textarea name="description.en" label="{{trans('tomato-subscription::global.features.description')}} {{trans('tomato-subscription::global.lang.en')}}" placeholder="{{trans('tomato-subscription::global.features.description')}} {{trans('tomato-subscription::global.lang.en')}}" autosize />
 
         <x-splade-select  name="key" label="{{trans('tomato-subscription::global.features.key')}}" placeholder="{{trans('tomato-subscription::global.features.key')}}" choices>
-              @foreach(Route::getRoutes() as $route)
+              @foreach($routes as $route)
                   @if(isset($route->action['as'])))
                     <option value="{{$route->action['as']}}">{{$route->uri}}</option>
                   @endif
               @endforeach
           </x-splade-select>
+
+
+        <x-splade-select  name="api_key" label="{{trans('tomato-subscription::global.features.api_key')}}"
+                          placeholder="{{trans('tomato-subscription::global.features.api_key')}}" choices>
+            @foreach($routes as $route)
+                @if (strpos($route->uri, 'api/') !== false)
+                    <option value="{{ str_replace('/', '-', $route->uri) }}">{{ $route->uri }}</option>
+                @endif
+            @endforeach
+        </x-splade-select>
+
           <x-splade-input name="value" type="number"   label="{{trans('tomato-subscription::global.features.value')}}" placeholder="{{trans('tomato-subscription::global.features.value')}}" />
 
           <x-splade-checkbox name="is_active" label="{{trans('tomato-subscription::global.features.is_active')}}" />

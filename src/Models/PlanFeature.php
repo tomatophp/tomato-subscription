@@ -41,6 +41,7 @@ class PlanFeature extends Model
         'value',
         'extra',
         'is_active',
+        'api_key',
     ];
 
     /**

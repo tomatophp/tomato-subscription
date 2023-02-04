@@ -44,6 +44,7 @@ return [
         "name" => "Name",
         "description" => "Description",
         "key" => "Key",
+        "api_key" => "Api Key",
         "value" => "Value",
         "is_active" => "Is Active",
         "messages" => [
