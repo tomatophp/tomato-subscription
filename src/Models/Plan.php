@@ -43,7 +43,8 @@ class Plan extends Model
         'is_recurring',
         'is_active',
         'is_free',
-        'is_default'
+        'is_default',
+        'color',
     ];
 
     /**

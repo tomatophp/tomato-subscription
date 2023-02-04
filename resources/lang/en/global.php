@@ -14,6 +14,7 @@ return [
         "name" => "Name",
         "description" => "Description",
         "price" => "Price",
+        "color" => "Color",
         "invoice_interval" => "Invoice Interval",
         "invoice_intervals"=> [
             "day" => "Day",

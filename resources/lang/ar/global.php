@@ -14,6 +14,7 @@ return [
         "name" => "الاسم",
         "description" => "الوصف",
         "price" => "السعر",
+        "color" => "اللون",
         "invoice_interval" => "المدة الزمنية",
         "invoice_intervals"=> [
             "day" => "يوم",
