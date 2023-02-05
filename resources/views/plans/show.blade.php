@@ -71,6 +71,20 @@
             </div>
         </div>
 
+        <div class="flex justify-between">
+            <div>
+                <h3 class="text-lg font-bold">
+                    {{trans('tomato-subscription::global.plans.color')}}
+                </h3>
+            </div>
+            <div>
+                <h3 class="text-lg">
+                    <x-heroicon-s-check-circle  class="h-8 w-8 ltr:mr-2 rtl:ml-2"
+                                                style="color: {{ $model->color }}"/>
+                </h3>
+            </div>
+        </div>
+
           <div class="flex justify-between">
               <div>
                   <h3 class="text-lg font-bold">

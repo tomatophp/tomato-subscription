@@ -14,6 +14,7 @@ return [
         "name" => "الاسم",
         "description" => "الوصف",
         "price" => "السعر",
+        "color" => "اللون",
         "invoice_interval" => "المدة الزمنية",
         "invoice_intervals"=> [
             "day" => "يوم",
@@ -43,6 +44,7 @@ return [
         "name" => "الاسم",
         "description" => "الوصف",
         "key" => "المفتاح",
+        "api_key" => "مفتاح API",
         "value" => "القيمة الافتراضية",
         "is_active" => "مفعل؟",
         "messages" => [

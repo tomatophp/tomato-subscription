@@ -21,6 +21,8 @@
         </div>
         <x-splade-input type="text" name="order" label="{{trans('tomato-subscription::global.plans.order')}}"  placeholder="{{trans('tomato-subscription::global.plans.order')}}" />
 
+        <x-tomato-color name="color" label="{{trans('tomato-subscription::global.plans.color')}}" />
+
         <div class="grid grid-cols-2 gap-2">
             <x-splade-checkbox name="is_recurring" label="{{trans('tomato-subscription::global.plans.is_recurring')}}"/>
             <x-splade-checkbox name="is_active" label="{{trans('tomato-subscription::global.plans.is_active')}}"/>
