@@ -3,26 +3,36 @@
 namespace TomatoPHP\TomatoSubscription\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use TomatoPHP\TomatoAdmin\Facade\Tomato;
 use TomatoPHP\TomatoSubscription\Http\Requests\PlanFeature\PlanFeatureStoreRequest;
 use TomatoPHP\TomatoSubscription\Http\Requests\PlanFeature\PlanFeatureUpdateRequest;
 use TomatoPHP\TomatoSubscription\Models\PlanFeature;
-use TomatoPHP\TomatoPHP\Services\Tomato;
 use TomatoPHP\TomatoSubscription\Tables\PlanFeatureTable;
+
 
 class PlanFeatureController extends Controller
 {
+    public string $model;
+
+    public function __construct()
+    {
+        $this->model = PlanFeature::class;
+    }
+
+
     /**
      * @param Request $request
      * @return View
      */
-    public function index(Request $request): View
+    public function index(Request $request): View|JsonResponse
     {
         return Tomato::index(
             request: $request,
+            model: $this->model,
             view: 'tomato-subscription::plan_features.index',
             table: PlanFeatureTable::class,
         );
@@ -35,7 +45,8 @@ class PlanFeatureController extends Controller
     public function api(Request $request): JsonResponse
     {
         return response()->json([
-            "model"=> PlanFeature::where('is_active', 1)->get()->toArray()
+            'request' => $request,
+            "model" => PlanFeature::where('is_active', 1)->get()->toArray()
         ]);
     }
 
@@ -53,7 +64,7 @@ class PlanFeatureController extends Controller
      * @param PlanFeatureStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(PlanFeatureStoreRequest $request): RedirectResponse
+    public function store(PlanFeatureStoreRequest $request): RedirectResponse|JsonResponse
     {
         $response = Tomato::store(
             request: $request,
@@ -62,14 +73,18 @@ class PlanFeatureController extends Controller
             redirect: 'admin.plan-features.index',
         );
 
-        return $response['redirect'];
+        if ($response instanceof JsonResponse) {
+            return $response;
+        }
+
+        return $response->redirect;
     }
 
     /**
      * @param PlanFeature $model
      * @return View
      */
-    public function show(PlanFeature $model): View
+    public function show(PlanFeature $model): View|JsonResponse
     {
         return Tomato::get(
             model: $model,
@@ -94,7 +109,7 @@ class PlanFeatureController extends Controller
      * @param PlanFeature $model
      * @return RedirectResponse
      */
-    public function update(PlanFeatureUpdateRequest $request, PlanFeature $model): RedirectResponse
+    public function update(PlanFeatureUpdateRequest $request, PlanFeature $model): RedirectResponse|JsonResponse
     {
         $response = Tomato::update(
             request: $request,
@@ -103,19 +118,29 @@ class PlanFeatureController extends Controller
             redirect: 'admin.plan-features.index',
         );
 
-        return $response['redirect'];
+        if ($response instanceof JsonResponse) {
+            return $response;
+        }
+
+        return $response->redirect;
     }
 
     /**
      * @param PlanFeature $model
      * @return RedirectResponse
      */
-    public function destroy(PlanFeature $model): RedirectResponse
+    public function destroy(PlanFeature $model): RedirectResponse|JsonResponse
     {
-        return Tomato::destroy(
+        $response = Tomato::destroy(
             model: $model,
             message: trans('tomato-subscription::global.features.messages.deleted'),
             redirect: 'admin.plan-features.index',
         );
+
+        if ($response instanceof JsonResponse) {
+            return $response;
+        }
+
+        return $response->redirect;
     }
 }

@@ -28,14 +28,14 @@ class PlanStoreRequest extends FormRequest
              'name.en' => 'required|max:255|string',
             'description.ar' => 'nullable|max:65535',
             'description.en' => 'nullable|max:65535',
-            'order' => 'nullable',
-            'price' => 'required',
-            'invoice_period' => 'required',
+            'order' => 'nullable|numeric',
+            'price' => 'required|numeric',
+            'invoice_period' => 'required|numeric',
             'invoice_interval' => 'required|string',
-            'is_recurring' => 'nullable',
-            'is_active' => 'nullable',
-            'is_free' => 'nullable',
-            'is_default' => 'nullable'
+            'is_recurring' => 'nullable|boolean',
+            'is_active' => 'nullable|boolean',
+            'is_free' => 'nullable|boolean',
+            'is_default' => 'nullable|boolean'
         ];
     }
 }

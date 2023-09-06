@@ -1,4 +1,5 @@
-<x-splade-modal class="font-main">
+<x-tomato-admin-container class="font-main" label="{{trans('tomato-admin::global.crud.view')}} {{__('Plan')}}
+#{{$model->id}}">
     <h1 class="text-2xl font-bold mb-4">{{trans('tomato-admin::global.crud.view')}} {{trans('tomato-subscription::global.plans.single')}} #{{$model->id}}</h1>
 
     <div class="flex flex-col space-y-4">
@@ -154,4 +155,4 @@
           </div>
 
     </div>
-</x-splade-modal>
+    </x-tomato-admin-container>

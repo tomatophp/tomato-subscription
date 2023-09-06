@@ -4,28 +4,37 @@ namespace TomatoPHP\TomatoSubscription\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use ProtoneMedia\Splade\Facades\Toast;
+use TomatoPHP\TomatoAdmin\Facade\Tomato;
 use TomatoPHP\TomatoSubscription\Http\Requests\PlanSubscription\PlanSubscriptionStoreRequest;
 use TomatoPHP\TomatoSubscription\Http\Requests\PlanSubscription\PlanSubscriptionUpdateRequest;
 use TomatoPHP\TomatoSubscription\Models\Plan;
 use TomatoPHP\TomatoSubscription\Models\PlanSubscription;
-use ProtoneMedia\Splade\Facades\Toast;
-use TomatoPHP\TomatoPHP\Services\Tomato;
 use TomatoPHP\TomatoSubscription\Tables\PlanSubscriptionTable;
+
 
 class PlanSubscriptionController extends Controller
 {
+    public string $model;
+
+    public function __construct()
+    {
+        $this->model = PlanSubscription::class;
+    }
+
     /**
      * @param Request $request
      * @return View
      */
-    public function index(Request $request): View
+    public function index(Request $request): View|JsonResponse
     {
         return Tomato::index(
             request: $request,
+            model: $this->model,
             view: 'tomato-subscription::plan_subscription.index',
             table: PlanSubscriptionTable::class,
         );
@@ -57,40 +66,38 @@ class PlanSubscriptionController extends Controller
      * @param PlanSubscriptionStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(PlanSubscriptionStoreRequest $request): RedirectResponse
+    public function store(PlanSubscriptionStoreRequest $request): RedirectResponse|JsonResponse
     {
-        foreach(config('tomato-subscription.types') as $key=>$item){
-            if($key===(int)$request->get('model_type')){
+        foreach (config('tomato-subscription.types') as $key => $item) {
+            if ($key === (int)$request->get('model_type')) {
                 $request->merge([
-                   "model_type"  => $item['id']
+                    "model_type" => $item['id']
                 ]);
             }
         }
         $check = PlanSubscription::where('model_type', $request->get('model_type'))
             ->where('model_id', $request->get('model_id'))->first();
 
-        if($check){
+        if ($check) {
             Toast::danger(trans('tomato-subscription::global.subscription.messages.not'))->autoDismiss(2);
             return back();
         }
 
         $plan = Plan::find($request->get('plan_id'));
-        if($plan->invoice_period === 'day'){
+        if ($plan->invoice_period === 'day') {
             $request->merge([
-                "starts_at"  => Carbon::now(),
-                "ends_at"  => Carbon::now()->addDays($plan->invoice_interval),
+                "starts_at" => Carbon::now(),
+                "ends_at" => Carbon::now()->addDays($plan->invoice_interval),
             ]);
-        }
-        else if($plan->invoice_period === 'month'){
+        } else if ($plan->invoice_period === 'month') {
             $request->merge([
-                "starts_at"  => Carbon::now(),
-                "ends_at"  => Carbon::now()->addMonth($plan->invoice_interval),
+                "starts_at" => Carbon::now(),
+                "ends_at" => Carbon::now()->addMonth($plan->invoice_interval),
             ]);
-        }
-        else if($plan->invoice_period === 'year'){
+        } else if ($plan->invoice_period === 'year') {
             $request->merge([
-                "starts_at"  => Carbon::now(),
-                "ends_at"  => Carbon::now()->addYear($plan->invoice_interval),
+                "starts_at" => Carbon::now(),
+                "ends_at" => Carbon::now()->addYear($plan->invoice_interval),
             ]);
         }
 
@@ -101,14 +108,18 @@ class PlanSubscriptionController extends Controller
             redirect: 'admin.plan-subscription.index',
         );
 
-        return $response['redirect'];
+        if ($response instanceof JsonResponse) {
+            return $response;
+        }
+
+        return $response->redirect;
     }
 
     /**
      * @param PlanSubscription $model
      * @return View
      */
-    public function show(PlanSubscription $model): View
+    public function show(PlanSubscription $model): View|JsonResponse
     {
         return Tomato::get(
             model: $model,
@@ -122,8 +133,8 @@ class PlanSubscriptionController extends Controller
      */
     public function edit(PlanSubscription $model): View
     {
-        foreach(config('tomato-subscription.types') as $key=>$item){
-            if($item['id']===$model->model_type){
+        foreach (config('tomato-subscription.types') as $key => $item) {
+            if ($item['id'] === $model->model_type) {
                 $model->model_type = $key;
             }
         }
@@ -139,42 +150,40 @@ class PlanSubscriptionController extends Controller
      * @param PlanSubscription $model
      * @return RedirectResponse
      */
-    public function update(PlanSubscriptionUpdateRequest $request, PlanSubscription $model): RedirectResponse
+    public function update(PlanSubscriptionUpdateRequest $request, PlanSubscription $model): RedirectResponse|JsonResponse
     {
-        foreach(config('tomato-subscription.types') as $key=>$item){
-            if($key===(int)$request->get('model_type')){
+        foreach (config('tomato-subscription.types') as $key => $item) {
+            if ($key === (int)$request->get('model_type')) {
                 $request->merge([
-                    "model_type"  => $item['id']
+                    "model_type" => $item['id']
                 ]);
             }
         }
 
-        if((int)$request->get('plan_id') !== $model->plan_id){
+        if ((int)$request->get('plan_id') !== $model->plan_id) {
             $check = PlanSubscription::where('model_type', $request->get('model_type'))
                 ->where('model_id', $request->get('model_id'))->first();
 
-            if($check){
+            if ($check) {
                 Toast::danger(trans('tomato-subscription::global.subscription.messages.not'))->autoDismiss(2);
                 return back();
             }
 
             $plan = Plan::find($request->get('plan_id'));
-            if($plan->invoice_period === 'day'){
+            if ($plan->invoice_period === 'day') {
                 $request->merge([
-                    "starts_at"  => Carbon::now(),
-                    "ends_at"  => Carbon::now()->addDays($plan->invoice_interval),
+                    "starts_at" => Carbon::now(),
+                    "ends_at" => Carbon::now()->addDays($plan->invoice_interval),
                 ]);
-            }
-            else if($plan->invoice_period === 'month'){
+            } else if ($plan->invoice_period === 'month') {
                 $request->merge([
-                    "starts_at"  => Carbon::now(),
-                    "ends_at"  => Carbon::now()->addMonth($plan->invoice_interval),
+                    "starts_at" => Carbon::now(),
+                    "ends_at" => Carbon::now()->addMonth($plan->invoice_interval),
                 ]);
-            }
-            else if($plan->invoice_period === 'year'){
+            } else if ($plan->invoice_period === 'year') {
                 $request->merge([
-                    "starts_at"  => Carbon::now(),
-                    "ends_at"  => Carbon::now()->addYear($plan->invoice_interval),
+                    "starts_at" => Carbon::now(),
+                    "ends_at" => Carbon::now()->addYear($plan->invoice_interval),
                 ]);
             }
         }
@@ -186,19 +195,29 @@ class PlanSubscriptionController extends Controller
             redirect: 'admin.plan-subscription.index',
         );
 
-        return $response['redirect'];
+        if ($response instanceof JsonResponse) {
+            return $response;
+        }
+
+        return $response->redirect;
     }
 
     /**
      * @param PlanSubscription $model
      * @return RedirectResponse
      */
-    public function destroy(PlanSubscription $model): RedirectResponse
+    public function destroy(PlanSubscription $model): RedirectResponse|JsonResponse
     {
-        return Tomato::destroy(
+        $response = Tomato::destroy(
             model: $model,
             message: trans('tomato-subscription::global.subscription.messages.deleted'),
             redirect: 'admin.plan-subscription.index',
         );
+
+        if ($response instanceof JsonResponse) {
+            return $response;
+        }
+
+        return $response->redirect;
     }
 }

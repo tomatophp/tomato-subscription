@@ -1,9 +1,8 @@
 
-<x-tomato-admin-layout>
+<x-tomato-admin-container container label="{{ __('Create Plan') }}">
     <x-slot name="header">
         {{trans('tomato-admin::global.crud.create')}} {{trans('tomato-subscription::global.plans.single')}}
     </x-slot>
-
     <x-splade-form
         :unguarded="['name', 'description']"
         :default="[
@@ -45,5 +44,4 @@
 
         <x-splade-submit label="{{trans('tomato-admin::global.crud.create-new')}} {{trans('tomato-subscription::global.plans.single')}}" :spinner="true" />
     </x-splade-form>
-
-</x-tomato-admin-layout>
+</x-tomato-admin-container>

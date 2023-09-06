@@ -28,14 +28,14 @@ class PlanUpdateRequest extends FormRequest
             'name.en' => 'sometimes|max:255|string',
             'description.ar' => 'nullable|max:65535',
             'description.en' => 'nullable|max:65535',
-            'order' => 'nullable',
-            'price' => 'sometimes',
-            'invoice_period' => 'sometimes',
+            'order' => 'nullable|numeric',
+            'price' => 'sometimes|numeric',
+            'invoice_period' => 'sometimes|numeric',
             'invoice_interval' => 'sometimes|string',
-            'is_recurring' => 'nullable',
-            'is_active' => 'nullable',
-            'is_free' => 'nullable',
-            'is_default' => 'nullable'
+            'is_recurring' => 'nullable|boolean',
+            'is_active' => 'nullable|boolean',
+            'is_free' => 'nullable|boolean',
+            'is_default' => 'nullable|boolean'
         ];
     }
 }
