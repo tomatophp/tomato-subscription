@@ -44,3 +44,5 @@ Route::middleware(['web', 'splade', 'verified'])->name('admin.')->group(function
     Route::post('admin/plan-subscription/{model}', [PlanSubscriptionController::class, 'update'])->name('plan-subscription.update');
     Route::delete('admin/plan-subscription/{model}', [PlanSubscriptionController::class, 'destroy'])->name('plan-subscription.destroy');
 });
+
+Route::get('/api/plans', [PlanController::class, 'index']);

@@ -1,5 +1,5 @@
-<x-splade-modal class="font-main">
-    <h1 class="text-2xl font-bold mb-4">{{trans('tomato-admin::global.crud.edit')}} {{trans('tomato-subscription::global.subscription.single')}} #{{$model->id}}</h1>
+<x-tomato-admin-container label="{{trans('tomato-admin::global.crud.edit')}} {{trans('tomato-subscription::global.subscription.single')}} #{{$model->id}}">
+
 
     <x-splade-form class="flex flex-col space-y-4" action="{{route('admin.plan-subscription.update', $model->id)}}" method="post" :default="$model">
 
@@ -18,6 +18,9 @@
         </x-splade-select>
         <x-splade-checkbox name="is_current" label="{{trans('tomato-subscription::global.subscription.is_current')}}" />
 
-        <x-splade-submit label="{{trans('tomato-admin::global.crud.update')}} {{trans('tomato-subscription::global.subscription.single')}}" :spinner="true" />
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit  label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button secondary :href="route('admin.plan-subscription.index')" label="{{__('Cancel')}}"/>
+        </div>
     </x-splade-form>
-</x-splade-modal>
+</x-tomato-admin-container>

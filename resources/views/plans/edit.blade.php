@@ -1,10 +1,7 @@
 
-<x-tomato-admin-layout>
-    <x-slot name="header">
-        {{trans('tomato-admin::global.crud.edit')}} {{trans('tomato-subscription::global.plans.single')}} #{{$model->id}}
-    </x-slot>
-    <x-splade-form class="my-4 flex flex-col space-y-4" action="{{route('admin.plans.update', $model->id)}}" method="post" :default="$model">
+<x-tomato-admin-container container label="{{ __('Edit Plan')  . ' # ' . $model->id }}">
 
+    <x-splade-form class="my-4 flex flex-col space-y-4" action="{{route('admin.plans.update', $model->id)}}" method="post" :default="$model">
         <x-splade-input name="name.ar" type="text" label="{{trans('tomato-subscription::global.plans.name')}} {{trans('tomato-subscription::global.lang.ar')}}"  placeholder="{{trans('tomato-subscription::global.plans.name')}} {{trans('tomato-subscription::global.lang.ar')}}" />
         <x-splade-input name="name.en" type="text" label="{{trans('tomato-subscription::global.plans.name')}} {{trans('tomato-subscription::global.lang.en')}}"  placeholder="{{trans('tomato-subscription::global.plans.name')}} {{trans('tomato-subscription::global.lang.en')}}" />
         <x-splade-textarea name="description.ar" label="{{trans('tomato-subscription::global.plans.description')}} {{trans('tomato-subscription::global.lang.ar')}}"  placeholder="{{trans('tomato-subscription::global.plans.description')}} {{trans('tomato-subscription::global.lang.ar')}}" autosize />
@@ -36,7 +33,7 @@
             </div>
         </x-tomato-repeater>
 
-        <x-splade-submit  label="{{trans('tomato-admin::global.crud.update')}} {{trans('tomato-subscription::global.features.single')}}" :spinner="true" />
+        <x-splade-submit  label="{{ __('Update Plan') }}" :spinner="true" />
     </x-splade-form>
 
-</x-tomato-admin-layout>
+</x-tomato-admin-container>

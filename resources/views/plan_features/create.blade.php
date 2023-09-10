@@ -3,8 +3,7 @@
     $routes = Route::getRoutes()
 @endphp
 
-<x-splade-modal class="font-main">
-    <h1 class="text-2xl font-bold mb-4">{{trans('tomato-admin::global.crud.create')}} {{trans('tomato-subscription::global.features.single')}}</h1>
+<x-tomato-admin-container label="{{trans('tomato-admin::global.crud.create')}} {{trans('tomato-subscription::global.features.single')}}">
 
     <x-splade-form class="flex flex-col space-y-4" action="{{route('admin.plan-features.store')}}" method="post">
 
@@ -35,6 +34,10 @@
 
           <x-splade-checkbox name="is_active" label="{{trans('tomato-subscription::global.features.is_active')}}" />
 
-        <x-splade-submit label="{{trans('tomato-admin::global.crud.create-new')}} {{trans('tomato-subscription::global.features.single')}}" :spinner="true" />
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit  label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button secondary :href="route('admin.plan-features.index')" label="{{__('Cancel')}}"/>
+        </div>
+
     </x-splade-form>
-</x-splade-modal>
+</x-tomato-admin-container>
