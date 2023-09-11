@@ -27,7 +27,7 @@
         </div>
         <x-splade-input type="text" name="order" label="{{trans('tomato-subscription::global.plans.order')}}"  placeholder="{{trans('tomato-subscription::global.plans.order')}}" />
 
-        <x-tomato-color name="color" label="{{trans('tomato-subscription::global.plans.color')}}" />
+        <x-tomato-admin-color name="color" label="{{trans('tomato-subscription::global.plans.color')}}" />
 
         <div class="grid grid-cols-2 gap-2">
             <x-splade-checkbox name="is_recurring" label="{{trans('tomato-subscription::global.plans.is_recurring')}}"/>
@@ -35,12 +35,12 @@
             <x-splade-checkbox name="is_free" label="{{trans('tomato-subscription::global.plans.is_free')}}"/>
             <x-splade-checkbox name="is_default" label="{{trans('tomato-subscription::global.plans.is_default')}}" />
         </div>
-        <x-tomato-repeater :options="['feature', 'value']" type="repeater" id="features" name="features" label="{{trans('tomato-subscription::global.plans.features')}}">
+        <x-tomato-admin-repeater :options="['feature', 'value']" type="repeater" id="features" name="features" label="{{trans('tomato-subscription::global.plans.features')}}">
             <div class="flex flex-col justify-center space-y-4">
                 <x-splade-select option-label="name.{{app()->getLocale()}}" option-value="id" remote-root="model.data" remote-url="{{route('admin.plan-features.api')}}" v-model="repeater.main[key].feature"  label="{{trans('tomato-subscription::global.plans.feature')}}" placeholder="{{trans('tomato-subscription::global.plans.feature')}}"  />
                 <x-splade-input v-model="repeater.main[key].value" name="value" type="text"  label="{{trans('tomato-subscription::global.plans.value')}}" placeholder="{{trans('tomato-subscription::global.plans.value')}}" />
             </div>
-        </x-tomato-repeater>
+        </x-tomato-admin-repeater>
 
         <x-splade-submit label="{{trans('tomato-admin::global.crud.create-new')}} {{trans('tomato-subscription::global.plans.single')}}" :spinner="true" />
     </x-splade-form>
