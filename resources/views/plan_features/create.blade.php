@@ -7,10 +7,8 @@
 
     <x-splade-form class="flex flex-col space-y-4" action="{{route('admin.plan-features.store')}}" method="post">
 
-          <x-splade-input name="name.ar" type="text" label="{{trans('tomato-subscription::global.features.name')}} {{trans('tomato-subscription::global.lang.ar')}}"  placeholder="{{trans('tomato-subscription::global.features.name')}} {{trans('tomato-subscription::global.lang.ar')}}" />
-          <x-splade-input name="name.en" type="text" label="{{trans('tomato-subscription::global.features.name')}} {{trans('tomato-subscription::global.lang.en')}}"  placeholder="{{trans('tomato-subscription::global.features.name')}} {{trans('tomato-subscription::global.lang.en')}}" />
-        <x-splade-textarea name="description.ar" label="{{trans('tomato-subscription::global.features.description')}} {{trans('tomato-subscription::global.lang.ar')}}" placeholder="{{trans('tomato-subscription::global.features.description')}} {{trans('tomato-subscription::global.lang.ar')}}" autosize />
-        <x-splade-textarea name="description.en" label="{{trans('tomato-subscription::global.features.description')}} {{trans('tomato-subscription::global.lang.en')}}" placeholder="{{trans('tomato-subscription::global.features.description')}} {{trans('tomato-subscription::global.lang.en')}}" autosize />
+        <x-tomato-translation name="name" type="text" label="{{trans('tomato-subscription::global.features.name')}}" placeholder="{{trans('tomato-subscription::global.features.name')}}" />
+        <x-tomato-translation textarea name="description" type="text" label="{{trans('tomato-subscription::global.features.description')}}" placeholder="{{trans('tomato-subscription::global.features.description')}}"/>
 
         <x-splade-select  name="key" label="{{trans('tomato-subscription::global.features.key')}}" placeholder="{{trans('tomato-subscription::global.features.key')}}" choices>
               @foreach($routes as $route)
