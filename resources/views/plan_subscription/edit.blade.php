@@ -10,7 +10,7 @@
             @endforeach
         </x-splade-select>
         <x-splade-select v-if="form.model_type" label="{{trans('tomato-subscription::global.subscription.subscriber')}}" placeholder="{{trans('tomato-subscription::global.subscription.subscriber')}}" name="model_id" remote-url="`/admin/plans/${form.model_type}/api`" remote-root="model" option-label="name" option-value="id" choices/>
-        <x-splade-select label="{{trans('tomato-subscription::global.subscription.plan_id')}}" placeholder="{{trans('tomato-subscription::global.subscription.plan_id')}}" name="plan_id" remote-url="/admin/plans/api" remote-root="model.data" option-label="name.{{app()->getLocale()}}" option-value="id" choices/>
+        <x-splade-select label="{{trans('tomato-subscription::global.subscription.plan_id')}}" placeholder="{{trans('tomato-subscription::global.subscription.plan_id')}}" name="plan_id" remote-url="/admin/plans/api" remote-root="data" option-label="name.{{app()->getLocale()}}" option-value="id" choices/>
         <x-splade-select name="status" label="{{trans('tomato-subscription::global.subscription.status')}}" placeholder="{{trans('tomato-subscription::global.subscription.status')}}" choices>
             <option value="pending">{{trans('tomato-subscription::global.subscription.statues.pending')}}</option>
             <option value="active">{{trans('tomato-subscription::global.subscription.statues.active')}}</option>

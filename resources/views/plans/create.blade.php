@@ -11,10 +11,8 @@
             'order' => \Modules\Plan\Entities\Plan::count() + 1,
         ]" class="my-4 flex flex-col space-y-4" action="{{route('admin.plans.store')}}" method="post" :default="['features'=>[]]">
 
-        <x-splade-input name="name.ar" type="text" label="{{trans('tomato-subscription::global.plans.name')}} {{trans('tomato-subscription::global.lang.ar')}}"  placeholder="{{trans('tomato-subscription::global.plans.name')}} {{trans('tomato-subscription::global.lang.ar')}}" />
-        <x-splade-input name="name.en" type="text" label="{{trans('tomato-subscription::global.plans.name')}} {{trans('tomato-subscription::global.lang.en')}}"  placeholder="{{trans('tomato-subscription::global.plans.name')}} {{trans('tomato-subscription::global.lang.en')}}" />
-        <x-splade-textarea name="description.ar" label="{{trans('tomato-subscription::global.plans.description')}} {{trans('tomato-subscription::global.lang.ar')}}"  placeholder="{{trans('tomato-subscription::global.plans.description')}} {{trans('tomato-subscription::global.lang.ar')}}" autosize />
-        <x-splade-textarea name="description.en" label="{{trans('tomato-subscription::global.plans.description')}} {{trans('tomato-subscription::global.lang.en')}}"  placeholder="{{trans('tomato-subscription::global.plans.description')}} {{trans('tomato-subscription::global.lang.en')}}" autosize />
+        <x-tomato-translation name="name" type="text" label="{{trans('tomato-subscription::global.plans.name')}}" placeholder="{{trans('tomato-subscription::global.plans.name')}}" />
+        <x-tomato-translation textarea name="description" type="text" label="{{trans('tomato-subscription::global.plans.description')}}" placeholder="{{trans('tomato-subscription::global.plans.description')}}"/>
         <x-splade-select name="invoice_interval" label="{{trans('tomato-subscription::global.plans.invoice_interval')}}"  placeholder="{{trans('tomato-subscription::global.plans.invoice_interval')}}" choices>
             <option value="day">{{trans('tomato-subscription::global.plans.invoice_intervals.day')}}</option>
             <option value="week">{{trans('tomato-subscription::global.plans.invoice_intervals.week')}}</option>

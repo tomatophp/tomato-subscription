@@ -41,13 +41,13 @@ class PlanController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-//    public function api(Request $request): JsonResponse
-//    {
-//        return Tomato::json(
-//            request: $request,
-//            model: Plan::class,
-//        );
-//    }
+   public function api(Request $request): JsonResponse
+   {
+       return Tomato::json(
+           request: $request,
+           model: Plan::class,
+       );
+   }
 
 
     /**
