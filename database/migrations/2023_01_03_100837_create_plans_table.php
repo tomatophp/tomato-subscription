@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('order')->default(1);
 
             // Price
-            $table->unsignedDouble('price')->default(0);
+            $table->double('price')->unsigned()->default(0);
             $table->integer('invoice_period')->default(0);
             $table->enum('invoice_interval', ['day', 'week', 'month', 'year'])->default('month');
 
